@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <title>字重</title>
+    <meta name="keyword" content="字重">
+    <meta name="description" content="查看系统默认字体的字重支持情况">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --background-color: #faf9f8;
+            --text-color: #333;
+            --hover-text-color: #faf9f8;
+        }
+
+        .serif {
+            font-family: serif;
+        }
+
+        .sans-serif {
+            font-family: sans-serif;
+        }
+
+        .monospace {
+            font-family: monospace;
+        }
+
+        .f100 {
+            font-weight: 100;
+        }
+
+        .f200 {
+            font-weight: 200;
+        }
+
+        .f300 {
+            font-weight: 300;
+        }
+
+        .f400 {
+            font-weight: 400;
+        }
+
+        .f500 {
+            font-weight: 500;
+        }
+
+        .f600 {
+            font-weight: 600;
+        }
+
+        .f700 {
+            font-weight: 700;
+        }
+
+        .f800 {
+            font-weight: 800;
+        }
+
+        .f900 {
+            font-weight: 900;
+        }
+
+        html {
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 16px;
+            line-height: 1.6em;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        #switch-font {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+            border: 1px solid #d13438;
+        }
+
+        #switch-font>button {
+            /* flex: 1; */
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            background: none;
+
+            width: 160px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        #switch-font>button:hover {
+            background-color: #d13438;
+            color: var(--hover-text-color);
+        }
+
+        #switch-font>button:active {
+            background-color: #a4262c;
+            color: var(--hover-text-color);
+        }
+
+
+        #main>div {
+            border-bottom: 1px solid #a4262c;
+            padding: 18px 0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #201f1e;
+                --text-color: #faf9f8;
+                /* --link-color: #f96; */
+            }
+
+            #main>div {
+                border-bottom: 1px solid #a4262c;
+            }
+        }
+    </style>
+</head>
+
+<body class="sans-serif">
+    <div id="switch-font">
+        <button onclick="s_font(0)" class="serif" title="宋体等">衬线体(serif)</button>
+        <button onclick="s_font(1)" class="sans-serif" title="Helvetica、黑体等">无衬线体(sans-serif)</button>
+        <button onclick="s_font(2)" class="monospace" title="JetBrains Mono等">等宽(mono)</button>
+    </div>
+    <main id="main">
+        <div>
+            <div class="f100">font-weight: 100</div>
+            <div class="f200">font-weight: 200</div>
+            <div class="f300">font-weight: 300</div>
+            <div class="f400">font-weight: 400 (normal)</div>
+            <div class="f500">font-weight: 500</div>
+            <div class="f600">font-weight: 600</div>
+            <div class="f700">font-weight: 700 (bold)</div>
+            <div class="f800">font-weight: 800</div>
+            <div class="f900">font-weight: 900</div>
+        </div>
+        <div>
+            <div class="f100">人生自古谁无死，留取丹心照汗青。</div>
+            <div class="f200">人生自古谁无死，留取丹心照汗青。</div>
+            <div class="f300">人生自古谁无死，留取丹心照汗青。</div>
+            <div class="f400">人生自古谁无死，留取丹心照汗青。</div>
+            <div class="f500">人生自古谁无死，留取丹心照汗青。</div>
+            <div class="f600">人生自古谁无死，留取丹心照汗青。</div>
+            <div class="f700">人生自古谁无死，留取丹心照汗青。</div>
+            <div class="f800">人生自古谁无死，留取丹心照汗青。</div>
+            <div class="f900">人生自古谁无死，留取丹心照汗青。</div>
+        </div>
+        <div>
+            <div class="f100">Life was like a box of chocolate ,you never know what you're gonna get.</div>
+            <div class="f200">Life was like a box of chocolate ,you never know what you're gonna get.</div>
+            <div class="f300">Life was like a box of chocolate ,you never know what you're gonna get.</div>
+            <div class="f400">Life was like a box of chocolate ,you never know what you're gonna get.</div>
+            <div class="f500">Life was like a box of chocolate ,you never know what you're gonna get.</div>
+            <div class="f600">Life was like a box of chocolate ,you never know what you're gonna get.</div>
+            <div class="f700">Life was like a box of chocolate ,you never know what you're gonna get.</div>
+            <div class="f800">Life was like a box of chocolate ,you never know what you're gonna get.</div>
+            <div class="f900">Life was like a box of chocolate ,you never know what you're gonna get.</div>
+        </div>
+        <div>
+            <div class="f100">3.1415926535 8979323846 2643383279 5028841971 6939937510</div>
+            <div class="f200">3.1415926535 8979323846 2643383279 5028841971 6939937510</div>
+            <div class="f300">3.1415926535 8979323846 2643383279 5028841971 6939937510</div>
+            <div class="f400">3.1415926535 8979323846 2643383279 5028841971 6939937510</div>
+            <div class="f500">3.1415926535 8979323846 2643383279 5028841971 6939937510</div>
+            <div class="f600">3.1415926535 8979323846 2643383279 5028841971 6939937510</div>
+            <div class="f700">3.1415926535 8979323846 2643383279 5028841971 6939937510</div>
+            <div class="f800">3.1415926535 8979323846 2643383279 5028841971 6939937510</div>
+            <div class="f900">3.1415926535 8979323846 2643383279 5028841971 6939937510</div>
+
+        </div>
+    </main>
+    <footer>
+        <p>©️ tanshin 2022</p>
+    </footer>
+    <script>
+        function s_font(type) {
+            let className
+            switch (type) {
+                case 0:
+                    className = "serif"
+                    break;
+                case 1:
+                    className = "sans-serif"
+                    break;
+                case 2:
+                    className = "monospace"
+                    break;
+            }
+            document.body.className = className;
+        }
+    </script>
+
+</body>
+
+</html>

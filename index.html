@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta author="tanshin">
+    <meta name="theme-color" content="#a4262c">
+    <meta property="og:image" content="/favicon/android-chrome-512x512.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Hello</title>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        :root {
+            --background-color: #faf9f8;
+            --text-color: #333;
+            --hover-text-color: #faf9f8;
+        }
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: var(--background-color);
+        }
+
+        .title {
+            font-family: serif;
+            color: #a4262c;
+            font-weight: 900;
+            font-size: xx-large;
+            margin: 18px 0;
+        }
+
+        a {
+            color: #a4262c;
+            padding: 4px 16px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #201f1e;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header><div class="title">Hello World!</div></header>
+    <main>
+        <a href="font-weight.html">字重</a>
+        <a href="notification.html">通知</a>
+        <a href="progressive.html">渐进式加载</a>
+    </main>
+    <footer><p>©️ tanshin 2022</p></footer>
+</body>
+
+</html>

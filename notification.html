@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta author="tanshin">
+    <meta name="theme-color" content="#a4262c">
+    <meta property="og:image" content="/favicon/android-chrome-512x512.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>通知</title>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --background-color: #faf9f8;
+            --text-color: #333;
+            --hover-text-color: #faf9f8;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: var(--background-color);
+        }
+
+        .title {
+            font-family: serif;
+            color: #a4262c;
+            font-weight: 900;
+            font-size: xx-large;
+            margin: 18px 0;
+        }
+
+        a {
+            color: #a4262c;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #201f1e;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="title">Notification</div>
+    </header>
+    <main>
+        <button id="notifications">申请权限</button>
+        <button id="notifications">弹出通知</button>
+    </main>
+    <footer>
+        <p>©️ tanshin 2022</p>
+    </footer>
+    <script>
+        var button = document.getElementById("notifications");
+        button.addEventListener('click', function (e) {
+            Notification.requestPermission().then(function (result) {
+                if (result === 'granted') {
+                    randomNotification();
+                }
+            });
+        });
+        var notify = document.getElementById("notify");
+        notify.addEventListener('click', function (e) {
+            var notifTitle = "Hello";
+            var notifBody = 'Life was like a box of chocolate ,you never know what you\'re gonna get.';
+            var notifImg = '/favicon/android-chrome-192x192.png';
+            var options = {
+                body: notifBody,
+                icon: notifImg
+            }
+            var notif = new Notification(notifTitle, options);
+        });
+    </script>
+</body>
+
+</html>

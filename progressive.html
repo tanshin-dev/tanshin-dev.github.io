@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta author="tanshin">
+    <meta name="theme-color" content="#a4262c">
+    <meta property="og:image" content="/favicon/android-chrome-512x512.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>渐进式加载</title>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --background-color: #faf9f8;
+            --text-color: #333;
+            --hover-text-color: #faf9f8;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: var(--background-color);
+        }
+
+        main {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main>img {
+            margin: 8px;
+        }
+
+        main img[data-src] {
+            filter: blur(0.2em);
+        }
+
+        main img {
+            filter: blur(0em);
+            transition: filter 0.5s;
+        }
+
+        .title {
+            font-family: serif;
+            color: #a4262c;
+            font-weight: 900;
+            font-size: xx-large;
+            margin: 18px 0;
+        }
+
+        a {
+            color: #a4262c;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #201f1e;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="title">Progressives</div>
+    </header>
+    <main>
+        <img src="/img/placeholder.png" data-src="/favicon/android-chrome-512x512.png"
+            style="width: 512px;height:512px">
+        <img src="/img/placeholder.png" data-src="/favicon/android-chrome-192x192.png"
+            style="width: 512px;height:512px">
+        <img src="/img/placeholder.png" data-src="/favicon/favicon-32x32.png" style="width: 512px;height:512px">
+    </main>
+    <footer>
+        <p>©️ tanshin 2022</p>
+    </footer>
+    <script>
+        let imagesToLoad = document.querySelectorAll('img[data-src]');
+        const loadImages = (image) => {
+            image.setAttribute('src', image.getAttribute('data-src'));
+            image.onload = () => {
+                image.removeAttribute('data-src');
+            };
+        };
+        //如果浏览器支持 IntersectionObserver 对象，应用会新建一个它的实例。当一个或多个监听对象跟 Observer 发生交互时（即图片出现在视口中时），作为参数传递的函数可以用来处理一些回调事务（例如图片加载，译者注）。我们可以迭代每一个对象，并对它们进行相应的处理：当图片可见时，我们开始加载真正的图片并且停止监听这张图片，因为在图片加载完成之后，我们已经没必要再知道它的状态了。
+
+        //重申我们之前提到的渐进增强理念：代码这么写的好处在于，不管浏览器支不支持 Intersection Observer，应用都能够正常工作。如果浏览器不支持 Intersection Observer，我们就会用上面提到的基础方法来实现图片的加载。
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((items, observer) => {
+                items.forEach((item) => {
+                    if (item.isIntersecting) {
+                        loadImages(item.target);
+                        observer.unobserve(item.target);
+                    }
+                });
+            });
+            imagesToLoad.forEach((img) => {
+                observer.observe(img);
+            });
+        } else {
+            imagesToLoad.forEach((img) => {
+                loadImages(img);
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+:root {
+    --background-color: #faf9f8;
+    --primary-color: a4262c;
+    --text-color: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #201f1e;
+        --text-color: #faf9f8
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 8px;
+    color: #999;
+    font-size: 12px;
+}
