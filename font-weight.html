@@ -80,7 +80,7 @@
             justify-content: center;
             align-items: center;
             padding: 80px 16px;
-            line-height: 1.6em;
+            
             color: var(--text-color);
             background-color: var(--background-color);
         }
@@ -123,6 +123,7 @@
         #main>div {
             border-bottom: 1px solid #a4262c;
             padding: 18px 0;
+            line-height: 1.6em;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -140,6 +141,7 @@
 </head>
 
 <body class="sans-serif">
+    <header><a href="/">首页</a></header>
     <div id="switch-font">
         <button onclick="s_font(0)" class="serif" title="宋体等">衬线体(serif)</button>
         <button onclick="s_font(1)" class="sans-serif" title="Helvetica、黑体等">无衬线体(sans-serif)</button>
