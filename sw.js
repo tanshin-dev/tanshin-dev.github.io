@@ -1,5 +1,5 @@
 // 定义缓存名称及列表
-var cacheName = 'pdxh-github-io-v1.0.1';
+var cacheName = 'pdxh-github-io-v1.0.2';
 var appShellFiles = [
     '/',
     '/index.html',
@@ -51,3 +51,9 @@ self.addEventListener('activate', function (e) {
         })
     );
 });
+//监听消息
+self.addEventListener("message", event => {
+    if( event.data === 'skipWaiting') {
+        self.skipWaiting();
+    }
+})
