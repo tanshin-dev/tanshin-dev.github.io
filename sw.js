@@ -40,10 +40,11 @@ self.addEventListener('fetch', function (e) {
 });
 //可以用来清理那些我们不再需要的缓存
 self.addEventListener('activate', function (e) {
+    let cacheWhiteList = [cacheName];
     e.waitUntil(
         caches.keys().then(function (keyList) {
             return Promise.all(keyList.map(function (key) {
-                if (cacheName.indexOf(key) === -1) {
+                if (cacheWhiteList.indexOf(key) === -1) {
                     return caches.delete(key);
                 }
             }));
