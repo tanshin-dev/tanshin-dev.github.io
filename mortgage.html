@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <title>房贷计算器</title>
+    <meta name="keyword" content="房贷,计算,商贷,商业贷款">
+    <meta name="description" content="房贷计算器">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --background-color: #faf9f8;
+            --text-color: #333;
+            --hover-text-color: #faf9f8;
+        }
+
+        .serif {
+            font-family: serif;
+        }
+
+        .sans-serif {
+            font-family: sans-serif;
+        }
+
+        .monospace {
+            font-family: monospace;
+        }
+
+        .f100 {
+            font-weight: 100;
+        }
+
+        .f200 {
+            font-weight: 200;
+        }
+
+        .f300 {
+            font-weight: 300;
+        }
+
+        .f400 {
+            font-weight: 400;
+        }
+
+        .f500 {
+            font-weight: 500;
+        }
+
+        .f600 {
+            font-weight: 600;
+        }
+
+        .f700 {
+            font-weight: 700;
+        }
+
+        .f800 {
+            font-weight: 800;
+        }
+
+        .f900 {
+            font-weight: 900;
+        }
+
+        html {
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 16px;
+
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        #switch-font {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+            border: 1px solid #d13438;
+        }
+
+        #switch-font>button {
+            /* flex: 1; */
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            background: none;
+
+            width: 160px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        #switch-font>button:hover {
+            background-color: #d13438;
+            color: var(--hover-text-color);
+        }
+
+        #switch-font>button:active {
+            background-color: #a4262c;
+            color: var(--hover-text-color);
+        }
+
+
+        #main>div {
+            border-bottom: 1px solid #a4262c;
+            padding: 18px 0;
+            line-height: 1.6em;
+        }
+
+        form {
+            margin: 18px 0;
+        }
+
+        label {
+            width: 80px;
+            display: inline-block;
+            text-align: right;
+        }
+
+        button {
+            background-color: #a4262c;
+            color: #faf9f8;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-left: 80px;
+        }
+
+        input {
+            border: none;
+            border: 1px solid #a4262c;
+            line-height: 1.5em;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        table td {
+            border: 1px solid #a4262c;
+            text-align: center;
+            padding: 8px 12px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #201f1e;
+                --text-color: #faf9f8;
+                /* --link-color: #f96; */
+            }
+
+            #main>div {
+                border-bottom: 1px solid #a4262c;
+            }
+        }
+    </style>
+</head>
+
+<body class="sans-serif">
+    <header><a href="/">首页</a></header>
+    <main id="main">
+        <div>
+            <div>工具计算结果仅供参考，实际以银行计算为准</div>
+            <a target="_blank"
+                href="http://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125440/3876551/index.html"><b>2022年10月20日
+                    贷款市场报价利率（LPR）:</b>1年期LPR为3.65%，5年期以上LPR为4.3%</a>
+            <form id="form" onsubmit="return false;">
+                <label title="计息方式">计息方式：</label>
+                <input type="radio" name="type" value="annuity" checked>等额本息
+                <input type="radio" name="type" value="linear">等额本金
+                <br />
+                <label title="贷款金额">贷款：</label><input type="number" name="money" value="" step="0.000001">万
+                <br />
+                <label title="基准利率">LPR：</label><input type="number" name="lpr" value="4.3" step="0.01">%
+                <br />
+                <label title="加点">&nbsp&nbspBP：</label><input type="number" name="bp" value="">
+                <br />
+                <label title="贷款几个月">期数：</label><input type="number" name="period" value="">
+                <br />
+                <button value="计算" onclick="calc()">计算</button>
+            </form>
+        </div>
+        <div id="result">暂无计算结果</div>
+    </main>
+    <footer>
+        <p>©️ tanshin 2022</p>
+    </footer>
+    <script text="javascript" src="/app.js"></script>
+    <script>
+        function fixFloat(num) {
+            return Math.round(num * 100) / 100
+        }
+        function addZero(num) {
+            let str = num.toString();
+            let dotIdx = str.indexOf('.')
+            if(dotIdx<0){
+                dotIdx = str.length;
+                str += "."
+            }
+            while (str.length <= dotIdx + 2) {
+                str += "0"
+            }
+            return str
+        }
+        function calc() {
+            const formData = new FormData(document.getElementById("form"))
+            const type = formData.get("type")
+            // 万元转成元，保留2位小数
+            const money = fixFloat(formData.get("money") * 10000);
+            // LPR %后保留两位小数
+            const lpr = fixFloat(formData.get("lpr"));
+            // BP加点 整数
+            const bp = parseInt(formData.get("bp"))
+            // 期数（月）
+            const period = parseInt(formData.get("period"))
+            const yRate = (bp + lpr * 100) / 10000
+            const mRate = (bp + lpr * 100) / 120000
+            let interest
+            let resultHtml = `<div><b>年利率:</b>${yRate * 100}%,<b>月利率:</b>${fixFloat(mRate * 100)}%</div>`;
+            switch (type) {
+                case 'annuity':
+                    const mPer = Math.pow(1 + mRate, period)
+                    const mPay = fixFloat((money * mRate * mPer) / (mPer - 1))
+                    interest = fixFloat((mPay * period - money))
+                    console.log('月供', mPay, '总利息', interest);
+                    resultHtml += `<div><b>月供:</b>${mPay}元,<b>总利息</b>:${interest}元</div>`
+                    break;
+                case 'linear':
+                    const mPrincipal = fixFloat(money / period)
+                    interest = fixFloat((period + 1) * money * mRate / 2)
+                    console.log('总利息', interest);
+                    resultHtml += `<div><b>总利息:</b>${interest}元</div>`
+                    resultHtml += `<table><thead><tr><td><b>期次</b></td><td><b>月供</b></td></tr></thead><tbody>`
+                    for (i = 0; i < period; i++) {
+                        const mPay = fixFloat(mPrincipal + (money - mPrincipal * i) * mRate)
+                        console.log('月供第', i + 1, '期', mPay)
+                        resultHtml += `<tr><td>${i + 1}</td><td>${addZero(mPay)}</td></tr>`
+                    }
+                    resultHtml += `</tbody></table>`
+                    break;
+            }
+            document.getElementById("result").innerHTML = resultHtml;
+            // debugger
+            // return false;
+        }
+
+// 1、等额本金
+// 总利息=（分期数+1)×贷款总额×月利率÷2，
+// 每期月供=每月应还本金+每月应还利息，
+// 每月应还本金=贷款总额÷分期数，
+// 每月应还利息=[贷款总额-每月应还本金*（当期数-1）]*月利率，
+// 月利率=年利率÷12个月。
+
+// 2、等额本息
+// 总利息=分期数*每期月供-贷款本金，
+// 每期月供=[贷款总额×月利率×（1+月利率）^分期数]÷[（1+月利率）^分期数－1]，
+// 其中“^”代表次方，是数学里的一种运算方式，比如2^12，就代表数字2需要重复相乘12次，大家自行计算时可以借助计算器等工具。
+
+
+    </script>
+
+</body>
+
+</html>

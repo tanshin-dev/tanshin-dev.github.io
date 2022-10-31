@@ -74,7 +74,7 @@
         button.addEventListener('click', function (e) {
             Notification.requestPermission().then(function (result) {
                 if (result === 'granted') {
-                    randomNotification();
+                    alert("权限已授予")
                 }
             });
         });

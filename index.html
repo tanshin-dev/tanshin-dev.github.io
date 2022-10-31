@@ -43,6 +43,25 @@
             font-size: xx-large;
             margin: 18px 0;
         }
+        main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .box {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .boxTitle {
+            font-family: serif;
+            color: #a4262c;
+            font-weight: 700;
+            font-size: large;
+            margin: 8px 0;
+            flex: 100%;
+        }
 
         a {
             color: #a4262c;
@@ -62,9 +81,23 @@
     <header><a href="/">首页</a></header>
     <div class="title">Hello World!</div>
     <main>
-        <a href="font-weight.html">字重</a>
-        <a href="notification.html">通知</a>
-        <a href="progressive.html">渐进式加载</a>
+        <div class="box">
+            <div class="boxTitle">Tools</div>
+            <a href="font-weight.html">字重</a>
+            <a href="mortgage.html">房贷计算器</a>
+        </div>
+        
+        <div class="box">
+            <div class="boxTitle">Links</div>
+            <a href="https://vscode.dev/" target="_blank">VS Code</a>
+        </div>
+        
+        <div class="box">
+            <div class="boxTitle">Tests</div>
+            <a href="notification.html">通知</a>
+            <a href="progressive.html">渐进式加载</a>
+        </div>
+        
     </main>
     <footer><p>©️ tanshin 2022</p></footer>
 </body>
