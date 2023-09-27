@@ -1,5 +1,5 @@
 // 定义缓存名称及列表
-var cacheName = 'pdxh-github-io-v1.01.00';
+var cacheName = 'tanshin-dev-github-io-v1.01.00';
 var appShellFiles = [
     '/',
     '/index.html',
