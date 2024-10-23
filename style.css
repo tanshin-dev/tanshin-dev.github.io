@@ -3,6 +3,7 @@
     --blur-background-color: rgba(241, 240, 239, 0.731);
     --primary-color: a4262c;
     --text-color: #333;
+    
 }
 
 html,
@@ -51,11 +52,22 @@ footer {
     right: 0;
 }
 
+button {
+    background-color: #9D2933; /* 胭脂红，按钮背景 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-color: #201f1e;
+        --background-color: #000;
         --text-color: #faf9f8;
         --blur-background-color: rgb(34, 20, 13, 0.531);
+    }
+    a {
+        color: #faf9f8;
     }
 }
